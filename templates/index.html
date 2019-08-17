@@ -1,0 +1,83 @@
+<html>
+  <head>
+     <title>Predictive Analytics Challenge</title>
+     <link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div class="container"></br>
+      <center>
+        <h2>Predictive Analytics Challenge</h2></br>
+      </center>
+    </div>
+ 
+    <div class="container"></br>       
+     <div class="row">
+      <div class="col-md-6">
+        <center>     
+            <h3>Accuracy Validation</h3><br>
+        </center>
+     
+         <div class="row align-items-center justify-content-center">
+          <form  action="" method="post" role="form" 
+                                enctype = "multipart/form-data">
+            {{ form.csrf }}
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" class="form-control" id="name" 
+                        name="name" placeholder="Please enter your name">
+                <br>
+              <label for="psid">PS_ID (7-digits):</label>
+              <input type="text" class="form-control" id="psid" 
+                        name="psid" placeholder="Please enter your ps id">
+                <br>
+              <label for="file">File (only '.csv' file):</label>
+              <input type="file" class="form-control" id="file" 
+                        name="myfile" placeholder="Upload your file">
+                <br>             
+            </div>
+            <br>                                                       
+            <center>
+              <button type="submit" class="btn btn-success">Submit</button>
+            </center>
+          </form>
+        </div>
+      
+        <br>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+        {% for message in messages %}
+            {% if "Error" not in message[1]: %}
+                <div class="alert alert-info">
+                <strong>Success! </strong> {{ message[1] }}
+                </div>
+            {% endif %}
+            {% if "Error" in message[1]: %}
+                <div class="alert alert-danger">
+                <strong>Error: </strong> {{ message[1] }}
+                </div>
+            {% endif %}
+        {% endfor %}
+            {% endif %}
+        {% endwith %}  
+          
+     </div>
+     
+      <!-- Second Column -->
+      <div class="col-md-4">
+         <div class="row align-items-center justify-content-center">
+          <center>
+            <h3>Top 10</h3><br>
+            {{top10.to_html(classes="table table-condensed table-bordered")|safe}}
+          </center>
+        </div>
+      </div>
+       
+    </div>
+    </div>  
+  
+  </body>
+</html>
+    
+    
